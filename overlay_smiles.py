@@ -1,7 +1,5 @@
 '''
-Visually check whether the fit smiles make sense
-
-must also compare call smiles to put smiles to see if (at a minimium) vol/skew/kurt parametrizations are close
+overlap smiles from multiple maturities in z space
 '''
 
 from ipshell import ipshell
