@@ -56,21 +56,23 @@ for symbol in symbols:
             fit_vols = scipy.polyval(coeffs, z)
 
             # set colors for calls/puts
-            pyplot.plot(z, fit_vols, '-')
+            exp_text = str(epoch2datetime(int(expiration_date)).date())
+            pyplot.plot(z, fit_vols, '-', label=exp_text)
             print "IF: %s".rjust(20) % implied_forward, "||",
             for prime in [vol, skew, kurt, wave, wing]:
                 print prime,
             print
             pyplot.axvline(x=0, ymin=0, ymax=1, linewidth=10, color="#B0E0E6", zorder=0)
 
-            pyplot.title("date: %s, exp: %s" % (
-                         str(epoch2datetime(int(t_date)).date()),
-                         str(epoch2datetime(int(expiration_date)).date())
+            pyplot.title("%s | date: %s" % (
+                         symbol,
+                         str(epoch2datetime(int(t_date)).date())
                                                )
                         )
 
         xmin = zmin; xmax = zmax; ymin = 1; ymax=5
         pyplot.axis([xmin, xmax, ymin, ymax])
+        pyplot.legend()
         pyplot.show()
         exit()
 
