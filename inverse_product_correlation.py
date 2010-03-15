@@ -18,7 +18,7 @@ conn = sqlite3.connect("Levered_Financial_ETF_Option_and_Stock_DB.sqlite3")
 pair = ('FAS','FAZ')
 symbol1 = 'FAS'
 symbol2 = 'FAZ'
-fit_parameter = 'skew'
+fit_parameter = 'vol'
 start_date = datetime.date(2009, 1, 2)
 end_date = datetime.date(2009, 11, 12)
 
@@ -46,6 +46,7 @@ xmin = min(coeff1)
 xmax = max(coeff1)
 fit_x = np.arange(xmin, xmax, (xmax - xmin) / 50.)
 fit_y = scipy.polyval(linear_fit, fit_x)
+equation = "y = %sx + %s" % tuple(linear_fit)
 
 # Let's make some pretty pictures!
 pyplot.subplot(3, 3, 1)
@@ -53,7 +54,7 @@ pyplot.plot(coeff1, coeff2, '.')
 pyplot.plot(fit_x, fit_y, 'r-')
 pyplot.xlabel(symbol1)
 pyplot.ylabel(symbol2)
-pyplot.title("%s, abs" % fit_parameter)
+pyplot.title("%s, %s " % (fit_parameter, equation))
 
 pyplot.subplot(3, 3, 2)
 pyplot.plot(np.log(price1/price2), np.log(coeff1/coeff2), '.')
