@@ -36,6 +36,8 @@ coeff2 = fit_coeff('coeff2')
 price1 = fit_coeff('price_close1')
 price2 = fit_coeff('price_close2')
 t_dates = fit_coeff('t_date')
+price_close_ini1 = fit_coeff('price_close_ini1')
+price_close_ini2 = fit_coeff('price_close_ini2')
 
 # Linear fit
 
@@ -59,10 +61,8 @@ pyplot.title("%s, log(c1/c2) v log(px1/px2)" % fit_parameter)
 
 pyplot.subplot(2,3,3)
 pyplot.plot(t_dates, coeff1-coeff2, '.')
-
 pyplot.twinx()
 pyplot.plot(t_dates, price1, "r-")
-
 
 pyplot.subplot(2,3,4)
 pyplot.plot(t_dates, price1)
@@ -71,5 +71,13 @@ pyplot.title(symbol1)
 pyplot.subplot(2,3,5)
 pyplot.plot(t_dates, price2)
 pyplot.title(symbol2)
+
+pyplot.subplot(2,3,6)
+pyplot.plot(t_dates, price_close_ini1)
+pyplot.twinx()
+pyplot.plot(t_dates, price_close_ini2, 'r')
+pyplot.title("price_close_ini")
+
+
 pyplot.show()
 ipshell("")

@@ -4,7 +4,9 @@ get_fit_coeff = """
                 symbol2.%(fit_parameter)s AS coeff2,
                 symbol1.t_date AS t_date,
                 symbol1.price_close AS price_close1,
-                symbol2.price_close AS price_close2
+                symbol2.price_close AS price_close2,
+                symbol1.price_close_ini AS price_close_ini1,
+                symbol2.price_close_ini AS price_close_ini2
             FROM
                     (SELECT *
                     FROM (SELECT * FROM VolSmile WHERE symbol='%(symbol1)s') vs
