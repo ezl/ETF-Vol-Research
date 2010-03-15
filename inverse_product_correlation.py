@@ -48,31 +48,31 @@ fit_x = np.arange(xmin, xmax, (xmax - xmin) / 50.)
 fit_y = scipy.polyval(linear_fit, fit_x)
 
 # Let's make some pretty pictures!
-pyplot.subplot(2,3,1)
+pyplot.subplot(2, 3, 1)
 pyplot.plot(coeff1, coeff2, '.')
 pyplot.plot(fit_x, fit_y, 'r-')
 pyplot.xlabel(symbol1)
 pyplot.ylabel(symbol2)
 pyplot.title("%s, abs" % fit_parameter)
 
-pyplot.subplot(3,3,2)
+pyplot.subplot(3, 3, 2)
 pyplot.plot(np.log(price1/price2), np.log(coeff1/coeff2), '.')
 pyplot.title("%s, log(c1/c2) v log(px1/px2)" % fit_parameter)
 
-pyplot.subplot(2,3,3)
+pyplot.subplot(2, 3, 3)
 pyplot.plot(t_dates, coeff1-coeff2, '.')
 pyplot.twinx()
 pyplot.plot(t_dates, price1, "r-")
 
-pyplot.subplot(2,3,4)
+pyplot.subplot(2, 3, 4)
 pyplot.plot(t_dates, price1)
 pyplot.title(symbol1)
 
-pyplot.subplot(2,3,5)
+pyplot.subplot(2, 3, 5)
 pyplot.plot(t_dates, price2)
 pyplot.title(symbol2)
 
-pyplot.subplot(2,3,6)
+pyplot.subplot(2, 3, 6)
 pyplot.plot(t_dates, price_close_ini1)
 pyplot.twinx()
 pyplot.plot(t_dates, price_close_ini2, 'r')
