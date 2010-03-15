@@ -16,11 +16,11 @@ from matplotlib import pyplot
 conn = sqlite3.connect("Levered_Financial_ETF_Option_and_Stock_DB.sqlite3")
 
 pair = ('FAS','FAZ')
-symbol1 = 'FAS'
-symbol2 = 'FAZ'
 fit_parameter = 'vol'
 start_date = datetime.date(2009, 1, 2)
 end_date = datetime.date(2009, 11, 12)
+symbol1 = pair[0]
+symbol2 = pair[1]
 
 params = dict()
 params['symbol1'] = symbol1
