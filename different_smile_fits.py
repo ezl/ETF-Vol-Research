@@ -116,13 +116,13 @@ for symbol in symbols:
                         fit = fit + x[c] * (z **c)
                     error_unweighted = np.sum((delta_wt_avg_implied_vols-fit) ** 2)
                     error = np.sum(weights*(delta_wt_avg_implied_vols -fit)**4)
-                    print weights
                     return error
                 import openopt
                 nlp = openopt.NLP(penalty, np.zeros(4))
                 r=nlp.solve('ralg')
                 coeffs2=r.xf
                 coeffs2=list(coeffs2)
+                print strikes
                 def three(c, x):
                     return c[3] * x**3 + c[2] * x**2 + c[1] * x + c[0]
                 weights3 = np.exp(-abs(z ** 2))
