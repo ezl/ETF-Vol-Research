@@ -3,7 +3,7 @@ get_t_dates = """
             FROM OptionValue
             WHERE symbol = '%(symbol)s'"""
 get_spot_closing_price = """
-            SELECT price_close
+            SELECT price_close_ini
             FROM StockPrice
             WHERE symbol = '%(symbol)s'
             AND t_date = '%(t_date)s'"""

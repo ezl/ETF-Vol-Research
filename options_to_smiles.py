@@ -49,7 +49,7 @@ for symbol in symbols:
         print str(epoch2datetime(int(t_date)).date()).rjust(11),
         params['t_date'] = t_date
         sql = SQL.get_spot_closing_price % params
-        stock_price_data = execute_query_DF(conn, sql)('price_close')
+        stock_price_data = execute_query_DF(conn, sql)('price_close_ini')
         if not len(stock_price_data) == 1:
             msg = "More than once spot closing price for %s on %s. Bad dog."
             raise Exception, msg
