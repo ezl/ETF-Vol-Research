@@ -4,7 +4,6 @@ import sqlite3
 import numpy as np
 import scipy
 from matplotlib import pyplot
-from scipy.optimize import curve_fit
 
 import nerdy
 from dataframe import dataframe, execute_query_DF
