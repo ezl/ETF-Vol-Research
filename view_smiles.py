@@ -42,7 +42,6 @@ for symbol in symbols:
             time_to_expiration = (float(expiration_date) - float(t_date)) / seconds_per_year
             sql = SQL.get_implied_forward % params
             implied_forward = execute_query_DF(conn, sql)('implied_forward')[0]
-            implied_vols = {}; strikes = {}
             sql = SQL.get_strike_and_cvol_and_pvol_and_call_delta % params
             vols = execute_query_DF(conn, sql)
             call_ivs = vols('call_iv')
