@@ -25,6 +25,7 @@ calls, puts, wt_averages, best_fit = pyplot.plot(3, 3, 'ro',
                                                  3, 3, 'bo',
                                                  3, 3, 'k*',
                                                  3, 3, 'k-')
+ATM_marker = pyplot.axvline()
 
 for symbol in symbols:
     params = dict()
@@ -70,11 +71,13 @@ for symbol in symbols:
 
 #            xmin = min(strikes)
 #            xmax = max(strikes)
+            time.sleep(.5)
+            ATM_marker.remove()
             xmin = int(implied_forward * 1/2)
             xmax = int(implied_forward * 3/2)
             ymin = min(np.hstack((call_ivs, put_ivs)))
             ymax = max(np.hstack((call_ivs, put_ivs)))
-            pyplot.axvline(x=implied_forward, ymin=0, ymax=1, linewidth=10, color="#B0E0E6", zorder=0)
+            ATM_marker = pyplot.axvline(x=implied_forward, ymin=0, ymax=1, linewidth=10, color="#B0E0E6", zorder=0)
             pyplot.axis([xmin, xmax, ymin, ymax])
             pyplot.title("F: %s, date: %s, exp: %s, points:%s" % (
                                                             implied_forward,
@@ -85,7 +88,6 @@ for symbol in symbols:
             graphs = [calls, puts, wt_averages, best_fit]
             y_data = [call_ivs, put_ivs, wt_avg_implied_vols, fit_vols]
             calls.set_xdata(strikes)
-            time.sleep(.5)
             for graph, y in zip(graphs, y_data):
                 graph.set_xdata(strikes)
                 graph.set_ydata(y)
