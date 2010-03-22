@@ -45,8 +45,10 @@ if GRAPH is True:
     ymin = .2
     ymax = 3.5
     pyplot.axis([xmin, xmax, ymin, ymax])
-
     alpha_days = np.arange(0, 500, 2)
+
+lb = [.3, .2, 1]
+ub = [5, 3, 10]
 
 if DEBUG is True and debug_symbols is not None:
     symbols = debug_symbols
@@ -58,12 +60,12 @@ for symbol in symbols:
     if DEBUG is True and debug_t_dates is not None:
         t_dates = debug_t_dates
     for t_date in t_dates:
-        print t_date
         params['t_date'] = t_date
         sql = SQL.get_expiration_dates_and_vols % params
         data = execute_query_DF(conn, sql)
         if data.numrows() < 4:
             continue
+        print t_date
         expiration_dates = np.array([int(i) for i in data('expiration_date')])
         days = (expiration_dates - int(t_date)) / seconds_per_day
         times_to_expiration = days / 365.
@@ -71,7 +73,9 @@ for symbol in symbols:
         vol = data('vol')
 
         from alpha import alpha_theo_vol
-        coeffs = nerdy.wls_fit(alpha_theo_vol,[1,.7,5], times_to_expiration, vol, lb=[.3,.2,1],ub=[5,3,10])
+        lb = [.3, .2, 1]
+        ub = [5, 3, 10]
+        coeffs = nerdy.wls_fit(alpha_theo_vol,[1,.7,5], times_to_expiration, vol, lb=lb,ub=ub)
         alpha_vols = alpha_theo_vol(coeffs, alpha_days/365.)
 
         if GRAPH is True:
@@ -84,9 +88,8 @@ for symbol in symbols:
             pyplot.draw()
 
         if DEBUG is False:
-            pass
             columns = ('symbol', 't_date',
                        'pivot_vol', 'mean_vol', 'alpha', 'expirations')
-            results = (symbol, t_date,
+            results = (symbol, int(t_date),
                        coeffs[0], coeffs[1], coeffs[2], len(expiration_dates))
             sqlite3tools.insert_to_sqlite(conn, TABLENAME, columns, results)
