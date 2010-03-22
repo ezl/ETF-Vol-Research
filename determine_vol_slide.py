@@ -22,6 +22,8 @@ mean_vol_yields = np.diff(np.log(results('mean_vol')))
 spot_yields = np.diff(np.log(results('spot')))
 
 pyplot.plot(spot_yields, pivot_vol_yields, 'k*')
+pyplot.xlabel("spot yields")
+pyplot.ylabel("pivot vol yields")
 pyplot.show()
 
 ipshell("")
