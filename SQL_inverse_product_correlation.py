@@ -23,5 +23,5 @@ get_fit_coeff = """
                     ) symbol2
             ON symbol1.t_date=symbol2.t_date
             AND symbol1.expiration_date=symbol2.expiration_date
-            WHERE symbol1.t_date > '%(start_date)s'
-            AND symbol1.t_date < '%(end_date)s'"""
+            WHERE symbol1.t_date > %(start_date)s
+            AND symbol1.t_date < %(end_date)s"""
