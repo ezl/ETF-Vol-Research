@@ -51,7 +51,8 @@ for symbol in symbols:
         sql = SQL.get_spot_closing_price % params
         stock_price_data = execute_query_DF(conn, sql)('price_close_ini')
         if not len(stock_price_data) == 1:
-            msg = "More than once spot closing price for %s on %s. Bad dog."
+            msg = "More than once spot closing price for %s on %s. Bad dog." % (symbol, t_date)
+            print len(stock_price_data)
             raise Exception, msg
         else:
             spot_closing_price = stock_price_data[0]
@@ -141,7 +142,7 @@ for symbol in symbols:
                     columns = ('symbol', 't_date', 'expiration_date',
                                'implied_forward', 'implied_rate',
                                'vol', 'skew', 'kurt', 'wave', 'wing')
-                    results = (symbol, t_date, expiration_date,
+                    results = (symbol, int(t_date), int(expiration_date),
                                implied_forward, implied_rate,
                                coeffs[4], coeffs[3], coeffs[2], coeffs[1], coeffs[0])
                     sqlite3tools.insert_to_sqlite(conn, TABLENAME, columns, results)
